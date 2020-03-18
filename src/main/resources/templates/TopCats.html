@@ -12,15 +12,17 @@
         <h4>Топ котиков</h4>
     </div>
 
-    <div class="list">
-        <ol>
-            <th:block th:each="cat: ${cats}">
-                <li class="list-item">
-                    <img th:src="${cat.getPhotoUrl()}" th:alt="${cat.getName()}">
-                    <span th:text="${cat.getName()}"></span>
-                </li>
-            </th:block>
-        </ol>
+    <ol>
+        <th:block th:each="cat: ${cats}">
+            <li class="list-item">
+                <img th:src="${cat.getPhotoUrl()}" th:alt="${cat.getName()}">
+                <span th:text="${cat.getName()}"></span>
+            </li>
+        </th:block>
+    </ol>
+
+    <div class="card">
+        <a href="/addCat">Добавить котика</a>
     </div>
 </div>
 </body>

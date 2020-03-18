@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -17,7 +18,7 @@ import java.util.Random;
 public class MainController {
     private CatRepository catRepository;
     private List<Cat> availableCats;
-    private static final Random radom = new Random();
+    private static final Random random = new Random();
 
     public MainController(CatRepository catRepository) {
         this.catRepository = catRepository;
@@ -32,14 +33,14 @@ public class MainController {
     public String getCatsToVote(Model model) {
         int size = availableCats.size();
 
-        if (size == 0) {
+        if (size < 2) {
             return "redirect:/top";
         }
 
-        int firstCatIndex = radom.nextInt(size);
-        int secondCatIndex = radom.nextInt(size);
+        int firstCatIndex = random.nextInt(size);
+        int secondCatIndex = random.nextInt(size);
         while (firstCatIndex == secondCatIndex) {
-            secondCatIndex = radom.nextInt(size);
+            secondCatIndex = random.nextInt(size);
         }
 
         Cat firstCat = availableCats.get(firstCatIndex);
@@ -70,8 +71,33 @@ public class MainController {
         List<Cat> cats = catRepository.findAll();
         cats.sort((o1, o2) -> o2.getRating() - o1.getRating());
 
-        model.addAttribute("cats", cats);
+        List<Cat> top10Cats = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            top10Cats.add(cats.get(i));
+        }
+
+        model.addAttribute("cats", top10Cats);
 
         return "TopCats";
+    }
+
+    @GetMapping("/addCat")
+    public String addCatPage() {
+        return "AddCat";
+    }
+
+    @PostMapping("/addCat")
+    public String addCat(@RequestParam String name, @RequestParam String photoUrl, Model model) {
+        Cat cat = new Cat();
+        cat.setName(name);
+        cat.setPhotoUrl(photoUrl);
+        cat.setRating(0);
+
+        cat = catRepository.save(cat);
+
+        availableCats.add(cat);
+        model.addAttribute("message", "Котик добавлен");
+
+        return "AddCat";
     }
 }

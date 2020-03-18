@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="overflow: auto">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить котика</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="cont">
+    <div class="header">
+        <h2>Мимимиметр</h2>
+        <h4>Топ котиков</h4>
+    </div>
+
+    <div class="card">
+        <form action="/addCat" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <label for="name">Имя котика</label>
+                    </td>
+                    <td>
+                        <input type="text" name="name" id="name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="photo">URL фотографии</label>
+                    </td>
+                    <td>
+                        <input type="text" name="photoUrl" id="photo">
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Добавить">
+        </form>
+
+        <span th:if="${message}" th:text="${message}"></span>
+        <br><br>
+        <a href="/top">Посмотреть топ котиков</a>
+    </div>
+</div>
+</body>
+</html>
