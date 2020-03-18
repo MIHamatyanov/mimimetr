@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="overflow: auto">
+<head>
+    <meta charset="UTF-8">
+    <title>Голосование</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="cont">
+    <div class="header">
+        <h2>Мимимиметр</h2>
+        <h4>Кто из них мимимишнее? Кликни по фотографии</h4>
+    </div>
+
+    <form action="/vote" method="post" id="first-form" class="form">
+        <div class="card">
+            <input type="hidden" th:value="${firstCat.getId()}" name="id">
+            <a href="#" onclick="document.getElementById('first-form').submit();">
+                <img th:src="${firstCat.getPhotoUrl()}" th:alt="${firstCat.getName()}"><br>
+                <span th:text="${firstCat.getName()}"></span>
+            </a>
+        </div>
+    </form>
+
+    <form action="/vote" method="post" id="second-form" class="form">
+        <div class="card">
+            <input type="hidden" th:value="${secondCat.getId()}" name="id">
+            <a href="#" onclick="document.getElementById('second-form').submit();">
+                <img th:src="${secondCat.getPhotoUrl()}" th:alt="${secondCat.getName()}"><br>
+                <span th:text="${secondCat.getName()}"></span>
+            </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

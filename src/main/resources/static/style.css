@@ -1,0 +1,22 @@
+img {
+    width: 300px;
+    height: 200px;
+    margin-right: 50px;
+}
+
+.cont {
+    display: table;
+    margin: 0 auto;
+}
+
+.header, .card {
+    text-align: center;
+}
+
+.form {
+    display: inline-block;
+}
+
+.list-item {
+    margin-top: 20px;
+}

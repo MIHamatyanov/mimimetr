@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="overflow: auto">
+<head>
+    <meta charset="UTF-8">
+    <title>Топ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="cont">
+    <div class="header">
+        <h2>Мимимиметр</h2>
+        <h4>Топ котиков</h4>
+    </div>
+
+    <div class="list">
+        <ol>
+            <th:block th:each="cat: ${cats}">
+                <li class="list-item">
+                    <img th:src="${cat.getPhotoUrl()}" th:alt="${cat.getName()}">
+                    <span th:text="${cat.getName()}"></span>
+                </li>
+            </th:block>
+        </ol>
+    </div>
+</div>
+</body>
+</html>
