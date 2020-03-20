@@ -14,7 +14,8 @@
 
     <form action="/vote" method="post" id="first-form" class="form">
         <div class="card">
-            <input type="hidden" th:value="${firstCat.getId()}" name="id">
+            <input type="hidden" th:value="${firstCat.getId()}" name="votedId">
+            <input type="hidden" th:value="${secondCat.getId()}" name="secondId">
             <a href="#" onclick="document.getElementById('first-form').submit();">
                 <img th:src="${firstCat.getPhotoUrl()}" th:alt="${firstCat.getName()}"><br>
                 <span th:text="${firstCat.getName()}"></span>
@@ -24,7 +25,8 @@
 
     <form action="/vote" method="post" id="second-form" class="form">
         <div class="card">
-            <input type="hidden" th:value="${secondCat.getId()}" name="id">
+            <input type="hidden" th:value="${secondCat.getId()}" name="votedId">
+            <input type="hidden" th:value="${firstCat.getId()}" name="secondId">
             <a href="#" onclick="document.getElementById('second-form').submit();">
                 <img th:src="${secondCat.getPhotoUrl()}" th:alt="${secondCat.getName()}"><br>
                 <span th:text="${secondCat.getName()}"></span>

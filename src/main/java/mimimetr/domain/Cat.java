@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Cat {
@@ -44,5 +45,20 @@ public class Cat {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cat cat = (Cat) o;
+        return Objects.equals(id, cat.id) &&
+                Objects.equals(photoUrl, cat.photoUrl) &&
+                Objects.equals(name, cat.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, photoUrl, name);
     }
 }
