@@ -64,7 +64,7 @@ public class MainController {
     }
 
     @PostMapping("/vote")
-    public String vote(@RequestParam Long votedId, @RequestParam Long secondId, HttpServletRequest request) {
+    public synchronized String vote(@RequestParam Long votedId, @RequestParam Long secondId, HttpServletRequest request) {
         Optional<Cat> votedCat = catRepository.findById(votedId);
         Optional<Cat> secondCat = catRepository.findById(secondId);
         if (votedCat.isPresent()) {
